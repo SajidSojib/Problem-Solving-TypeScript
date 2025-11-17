@@ -9,3 +9,44 @@ const formatValue = <T extends number|string|boolean>(value: T):T =>{
         return !value as T;
     }
 }
+
+
+
+const getLength = (value: string | any[]): number => {
+    if(typeof value === 'string'){
+        return value.length;
+    }
+    else if(Array.isArray(value)){
+        return value.length;
+    }
+}
+
+
+class Person {
+    constructor(public name: string, public age: number){}
+    getDetails(){
+        return `'Name: ${this.name}, Age: ${this.age}'`;
+    }
+}
+
+
+
+type Item = {
+  title: string;
+  rating: number;
+};
+const filterByRating = (items: Item[] ): Item[] =>{
+    const filtered = items.filter((item) => {
+        if(item.rating<0 || item.rating>5){
+            throw new Error('Rating must be between 0 and 5');
+        }
+        else return item.rating>=4
+    });
+    return filtered;
+}
+const items1 = [
+  { title: "Movie A", rating: 4 },
+  { title: "Movie B", rating: 5 },
+  { title: "Movie C", rating: 3.99 },
+  { title: "Movie D", rating: 4.5 },
+];
