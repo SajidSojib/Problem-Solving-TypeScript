@@ -44,9 +44,18 @@ const filterByRating = (items: Item[] ): Item[] =>{
     });
     return filtered;
 }
-const items1 = [
-  { title: "Movie A", rating: 4 },
-  { title: "Movie B", rating: 5 },
-  { title: "Movie C", rating: 3.99 },
-  { title: "Movie D", rating: 4.5 },
-];
+
+
+
+type User = {
+    id: number;
+    name: string;
+    email: string;
+    isActive: boolean;
+};
+const filterActiveUsers = (users: User[]): User[] => {
+    return users.filter((user) => user.isActive);
+}
+
+
+  
