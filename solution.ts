@@ -5,8 +5,11 @@ const formatValue = <T extends number|string|boolean>(value: T):T =>{
     else if(typeof value === 'string'){
         return value.toUpperCase() as T;
     }
-    else{ 
+    else if(typeof value === 'boolean'){
         return !value as T;
+    } 
+    else{
+        throw new Error('Invalid value');
     }
 }
 
@@ -20,6 +23,7 @@ const getLength = (value: string | any[]): number => {
         return value.length;
     }
 }
+//! do i have to use typeof and Array.isArray
 
 
 //----------------- 3 -------------------
@@ -46,6 +50,7 @@ const filterByRating = (items: Item[] ): Item[] =>{
     });
     return filtered;
 }
+//! do i have to handle rating and throw error if 0>rating>5
 
 
 
@@ -74,7 +79,6 @@ const printBookDetails = (book: Book): void => {
       `Title: ${book.title}, Author: ${book.author}, Published: ${book.publishedYear}, Available: ${book.isAvailable?'Yes':'No'}`
     );
 }
-
 
 
 //----------------- 7 -------------------
@@ -106,8 +110,22 @@ const getUniqueValues = (array1: ValueType[], array2: ValueType[]): ValueType[] 
     }
     return result;
 }
+//! is arr.length a method
+//! do i need to sort the array
 
 
-
+//----------------- 8 -------------------
+const calculateTotalPrice = (items: { name: string; price: number; quantity: number, discount?: number }[]): number => {
+    const totalPrice: number = items.reduce((total, item) => {
+        const { price, quantity, discount } = item;
+        if (discount && (discount < 0 || discount > 100)) {
+            throw new Error('Discount must be between 0 and 100');
+        }
+        const discountedPrice = price * (1 - (discount || 0)/100);
+        return total + discountedPrice * quantity;
+    }, 0);
+    return totalPrice;
+}
+//! do i have to handle discount if its 0 to 100
 
   
