@@ -28,7 +28,12 @@ const getLength = (value: string | any[]): number => {
 
 
 class Person {
-    constructor(public name: string, public age: number){}
+    name: string;
+    age: number;
+    constructor(name: string, age: number){
+        this.name = name;
+        this.age = age;
+    }
     getDetails():string {
         return `'Name: ${this.name}, Age: ${this.age}'`;
     }
@@ -57,7 +62,7 @@ type User = {
     isActive: boolean;
 };
 const filterActiveUsers = (users: User[]): User[] => {
-    return users.filter((user:User) => user.isActive);
+    return users.filter((user:User):boolean => user.isActive);
 }
 
 
@@ -116,4 +121,3 @@ const calculateTotalPrice = (items: { name: string; price: number; quantity: num
     return totalPrice;
 }
 
-  
