@@ -115,8 +115,9 @@ const calculateTotalPrice = (items: { name: string; price: number; quantity: num
         if (discount && (discount < 0 || discount > 100)) {
             throw new Error('Discount must be between 0 and 100');
         }
-        const discountedPrice = price * (1 - (discount || 0)/100);
-        return total + discountedPrice * quantity;
+    
+        const discountAmount = price*(discount || 0)/100;
+        return total + (price - discountAmount) * quantity;
     }, 0);
     return totalPrice;
 }
