@@ -14,7 +14,6 @@ const formatValue = <T extends number|string|boolean>(value: T):T =>{
 }
 
 
-//----------------- 2 -------------------
 const getLength = (value: string | any[]): number => {
     if(typeof value === 'string'){
         return value.length;
@@ -22,21 +21,20 @@ const getLength = (value: string | any[]): number => {
     else if(Array.isArray(value)){
         return value.length;
     }
+    else{
+        throw new Error('Type must need to be a string or an array')
+    }
 }
-//! do i have to use typeof and Array.isArray
 
 
-//----------------- 3 -------------------
 class Person {
     constructor(public name: string, public age: number){}
-    getDetails(){
+    getDetails():string {
         return `'Name: ${this.name}, Age: ${this.age}'`;
     }
 }
 
 
-
-//----------------- 4 -------------------
 type Item = {
   title: string;
   rating: number;
@@ -50,11 +48,8 @@ const filterByRating = (items: Item[] ): Item[] =>{
     });
     return filtered;
 }
-//! do i have to handle rating and throw error if 0>rating>5
 
 
-
-//----------------- 5 -------------------
 type User = {
     id: number;
     name: string;
@@ -62,12 +57,10 @@ type User = {
     isActive: boolean;
 };
 const filterActiveUsers = (users: User[]): User[] => {
-    return users.filter((user) => user.isActive);
+    return users.filter((user:User) => user.isActive);
 }
 
 
-
-//----------------- 6 -------------------
 interface Book {
   title: string;
   author: string;
@@ -81,7 +74,6 @@ const printBookDetails = (book: Book): void => {
 }
 
 
-//----------------- 7 -------------------
 type ValueType = string | number;
 const getUniqueValues = (array1: ValueType[], array2: ValueType[]): ValueType[] => {
     const result: ValueType[] = [];
@@ -110,11 +102,8 @@ const getUniqueValues = (array1: ValueType[], array2: ValueType[]): ValueType[] 
     }
     return result;
 }
-//! is arr.length a method
-//! do i need to sort the array
 
 
-//----------------- 8 -------------------
 const calculateTotalPrice = (items: { name: string; price: number; quantity: number, discount?: number }[]): number => {
     const totalPrice: number = items.reduce((total, item) => {
         const { price, quantity, discount } = item;
@@ -126,6 +115,5 @@ const calculateTotalPrice = (items: { name: string; price: number; quantity: num
     }, 0);
     return totalPrice;
 }
-//! do i have to handle discount if its 0 to 100
 
   
