@@ -80,33 +80,39 @@ const printBookDetails = (book: Book): void => {
 
 
 type ValueType = string | number;
-const getUniqueValues = (array1: ValueType[], array2: ValueType[]): ValueType[] => {
-    const result: ValueType[] = [];
-    let sizeOfResult: number = 0;
+const getUniqueValues = (
+  array1: ValueType[],
+  array2: ValueType[]
+): number[] => {
+  const result: number[] = [];
+  let sizeOfResult: number = 0;
 
-    const checkUnique = (value: ValueType): boolean => {
-        for (let i = 0; i < sizeOfResult; i++) {
-            if (result[i] === value) {
-                return false;
-            }
-        }
-        return true;
-    };
+  const checkUnique = (value: ValueType): boolean => {
+    for (let i = 0; i < sizeOfResult; i++) {
+      if(!Number(value)){
+          throw new Error('Value in array must be a number or a number in its string form');
+      }
+      if (result[i] === Number(value)) {
+        return false;
+      }
+    }
+    return true;
+  };
 
-    for (let i = 0; i < array1.length; i++) {
-        if (checkUnique(array1[i])) {
-            result[sizeOfResult] = array1[i];
-            sizeOfResult++;
-        }
+  for (let i = 0; i < array1.length; i++) {
+    if (checkUnique(array1[i])) {
+      result[sizeOfResult] = Number(array1[i]);
+      sizeOfResult++;
     }
-    for (let i = 0; i < array2.length; i++) {
-        if (checkUnique(array2[i])) {
-            result[sizeOfResult] = array2[i];
-            sizeOfResult++;
-        }
+  }
+  for (let i = 0; i < array2.length; i++) {
+    if (checkUnique(array2[i])) {
+      result[sizeOfResult] = Number(array2[i]);
+      sizeOfResult++;
     }
-    return result;
-}
+  }
+  return result;
+};
 
 
 const calculateTotalPrice = (items: { name: string; price: number; quantity: number, discount?: number }[]): number => {
